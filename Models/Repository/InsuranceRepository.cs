@@ -31,7 +31,7 @@ namespace Insurance_agency.Models.Repository
                         Name = entity.name,
                         Description = entity.description,
                         InsuranceTypeId = entity.insurance_type_id,
-                   
+                        InsuranceType = _context.TblInsuranceTypes.Where(d => d.Id == entity.id).FirstOrDefault(),
                         ExImage = entity.ex_image,
                     };
                     var q = _context.Add(Insurance);
@@ -85,13 +85,12 @@ namespace Insurance_agency.Models.Repository
         {
             try
             {
-                var item = _context.Insurances.Select(d=>new InsuranceView
+                var item = _context.Insurances.Select(d => new InsuranceView
                 {
                     id = d.Id,
                     name = d.Name,
                     description = d.Description,
                     insurance_type_id = (int)d.InsuranceTypeId,
-
                     ex_image = d.ExImage
                 }).ToHashSet();
                 if (item != null)

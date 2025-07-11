@@ -33,9 +33,28 @@ namespace Insurance_agency.Models.Repository
             throw new NotImplementedException();
         }
 
-        public InsuranceTypeView FindById(int id)
+        public InsuranceTypeView FindById(int id=0)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (id != 0)
+                {
+                    var item = _context.TblInsuranceTypes.Where(d=>d.Id == id).Select(d => new InsuranceTypeView
+                    {
+                        id = d.Id,
+                        description = d.Description,
+                        name = d.Name,
+                        active = d.Active,
+                    }).FirstOrDefault();
+                    return item;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return new InsuranceTypeView();
         }
 
         public HashSet<InsuranceTypeView> FindByKeywork(string keywork)

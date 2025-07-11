@@ -14,11 +14,11 @@
 <table class="table table-hover">
 	<thead class="thead-dark">
 		<tr>
-		
-			<th>Mã </th>
-			<th>Tên</th>
-			<th>Mô tả</th>
-			<th>Loại </th>
+
+			<th>Id </th>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Insurance Type </th>
 
 			<th>ExImage</th>
 			<th>Function</th>
@@ -27,11 +27,12 @@
 	<tbody>
 		@foreach (var item in insurance)
 		{
+			var insuranceType = Insurance_agency.Models.Repository.InsuranceTypeRepository.Instance.FindById(item.insurance_type_id);
 			<tr>
 				<td>@item.id</td>
 				<td>@item.name</td>
 				<td>@item.description</td>
-				<td>@item.insurance_type_id</td>
+				<td>@insuranceType.name</td>
 
 				<td><img src="@Url.Content("~/Content")/Image/Ex/@item.ex_image" height="50" alt="Alternate Text" /></td>
 				<td>
